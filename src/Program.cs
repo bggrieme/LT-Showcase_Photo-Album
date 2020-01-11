@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net; //WebClient class
-using System.Linq;
-using Newtonsoft.Json.Linq;
+﻿using System;//Console
 
 namespace LT_Showcase
 {
@@ -9,36 +6,9 @@ namespace LT_Showcase
     {
         static void Main(string[] args)
         {
-
-            //initial research process..
-            WebClient wc = new WebClient();
-            string json = wc.DownloadString("https://jsonplaceholder.typicode.com/photos");
-            JArray rss = JArray.Parse(json);
-
-            var photos =
-                from data in rss
-                select new
-                {
-                    albumId = (string)data["albumId"],
-                    id = (string)data["id"],
-                    title = (string)data["title"],
-                    url = (string)data["url"],
-                    thumbnailUrl = (string)data["thumbnailUrl"]
-                };
-
-            var queryPhotos =
-                from all in photos
-                where all.albumId == "3"
-                select all;
-
-
-
-            Console.WriteLine(rss[0].ToString());
-
-
-
-            Console.WriteLine();
-            Console.ReadKey();
+            PhotoProcessor proc = new PhotoProcessor("https://jsonplaceholder.typicode.com/photos");
+            proc.print_id_and_title_GroupedBy_albumId();
+            Console.ReadKey(); //this is only here to prevent the console from automatically closing.. I seem to recall this not being necessary in visual studio, so maybe it's only a Visual Studio Code thing.
         }
     }
 }
