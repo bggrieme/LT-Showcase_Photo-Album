@@ -1,4 +1,3 @@
-using System;
 using System.Linq; 
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ namespace LT_Showcase
 
         public PhotoProcessor(string jsonWebAddress)
         {
+            this.photos_List = new List<Photo>();
             System.Net.WebClient wc = new System.Net.WebClient();
             JArray JArr = JArray.Parse(wc.DownloadString(jsonWebAddress)); //WebClient downloads the given address as a string, and JArray.Parse breaks that string into individual json tokens which are then stored in token_array
             IList<JToken> jsonTokens = JArr.Children().ToList();      
