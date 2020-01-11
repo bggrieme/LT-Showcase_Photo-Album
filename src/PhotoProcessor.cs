@@ -1,6 +1,7 @@
-using System.Linq; 
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+using System; //Console
+using System.Linq; //query clauses and lots of other useful data manipulation things
+using Newtonsoft.Json.Linq; //JArray, JToken, other JThings
+using System.Collections.Generic; //List, IGrouping
 
 namespace LT_Showcase
 {
@@ -15,7 +16,7 @@ namespace LT_Showcase
             IList<JToken> jsonTokens = JArr.Children().ToList();      
             foreach(JToken t in JArr)
             {
-                this.photos_List.Add(t.ToObject<Photo>());
+                this.photos_List.Add(t.ToObject<Photo>()); //deserialize each JToken into a Photo obj and add it to the List
             }
         }
 
@@ -31,6 +32,30 @@ namespace LT_Showcase
                 queryResults.Add(p);
             }
             return queryResults;
+        }
+
+        /*Prints all photos to console in the following example format
+        > photo-album 1
+        [photo ID] photo title
+        [photo ID] photo title
+        > photo-album 2
+        [photo ID] photo title
+        [photo ID] photo title
+        etc. etc. */
+        public void print_id_and_title_GroupedBy_albumId()
+        {
+            var group =
+                from photo in this.photos_List
+                group photo by photo.albumId; //an IEnumerable<IGrouping<, Photo>>
+            foreach (var grouping in group) //for each IGrouping in IEnumerable<IGrouping<, Photo>>
+            {
+                Console.WriteLine("> photo-album " + grouping.Key); //
+                foreach (var photo in grouping)
+                {
+                    Console.WriteLine("[{0}] {1}", photo.id, photo.title);
+                }
+                Console.WriteLine(); //just a blank line between albums for presentation purposes
+            }
         }
     }
 }
