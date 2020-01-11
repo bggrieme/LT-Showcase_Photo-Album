@@ -15,7 +15,7 @@ public class PhotoProcessor_tests
     [Fact (DisplayName = ("Check Photo count integrity. Should get 5000"))]
     public void FullSet_JArray_Count()
     {
-        Assert.True(photos.photos_List.Count() == PHOTO_COUNT);
+        Assert.True(photos.photos_List.Count() == PHOTO_COUNT, "Expected count: " + PHOTO_COUNT + " | Actual count: " + photos.photos_List.Count());
     }
 
     /*Queries the full set to produce a subset and checks the count of this subset.*/
@@ -27,6 +27,7 @@ public class PhotoProcessor_tests
         Assert.True(subset.Count() == expectedCount, "Expected count: " + expectedCount + " | Actual count: " + subset.Count());
     }
 
+    /*Creates data subset from given albumId. Checks albumId of each member of that subset against the intended albumId*/
     [Theory (DisplayName = "After creating a subset by albumId, each item in the subset should have the same expected albumId")]
     [InlineData ("1")]
     public void Subset_by_AlbumId(string albumId)
