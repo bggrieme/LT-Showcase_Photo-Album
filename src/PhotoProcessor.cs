@@ -37,7 +37,8 @@ namespace LT_Showcase
         /*Prints all photos to console in the following example format
         > photo-album 1
         [photo ID] photo title
-        [photo ID] photo title
+        [photo ID] photo 
+        
         > photo-album 2
         [photo ID] photo title
         [photo ID] photo title
@@ -49,8 +50,8 @@ namespace LT_Showcase
                 group photo by photo.albumId; //an IEnumerable<IGrouping<, Photo>>
             foreach (var grouping in group) //for each IGrouping in IEnumerable<IGrouping<, Photo>>
             {
-                Console.WriteLine("> photo-album " + grouping.Key); //
-                foreach (var photo in grouping)
+                Console.WriteLine("> photo-album " + grouping.Key);
+                foreach (var photo in grouping) //for each photo in each IGrouping..
                 {
                     Console.WriteLine("[{0}] {1}", photo.id, photo.title);
                 }
