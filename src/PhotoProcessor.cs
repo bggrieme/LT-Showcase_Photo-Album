@@ -7,7 +7,6 @@ namespace LT_Showcase
     public class PhotoProcessor
     {
         public List<Photo> photos_List {get; private set;}
-
         public PhotoProcessor(string jsonWebAddress)
         {
             this.photos_List = new List<Photo>();
@@ -19,13 +18,19 @@ namespace LT_Showcase
                 this.photos_List.Add(t.ToObject<Photo>());
             }
         }
-        //TODO: write stubs. Write some tests. Implement stubs. Run tests, etc.
-        
+
         //Returns a subset of the data filtered by a given albumId
         public List<Photo> subset_by_album(string albumId){
-            List<Photo> photos_List = new List<Photo>();
-
-            return photos_List;
+            List<Photo> queryResults = new List<Photo>();
+            var results = 
+                from all in photos_List
+                where all.albumId == albumId
+                select all;
+            foreach(Photo p in results)
+            {
+                queryResults.Add(p);
+            }
+            return queryResults;
         }
     }
 }
