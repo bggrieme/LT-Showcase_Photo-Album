@@ -22,7 +22,7 @@ namespace LT_Showcase
         //TODO: write stubs. Write some tests. Implement stubs. Run tests, etc.
         
         //Returns a subset of the data filtered by a given albumId
-        public List<Photo> subset_by_album(int albumId){
+        public List<Photo> subset_by_album(string albumId){
             List<Photo> photos_List = new List<Photo>();
 
             return photos_List;
