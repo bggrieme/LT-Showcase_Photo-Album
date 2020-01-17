@@ -1,6 +1,6 @@
 using Xunit;
 using System.Linq;
-using LT_Showcase;
+using LTShowcase;
 using System.Collections.Generic;
 
 /*Note: these tests are really only good as long as the source json doesn't change, which it shouldn't. 
