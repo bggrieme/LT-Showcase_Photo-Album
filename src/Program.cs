@@ -1,6 +1,6 @@
 ﻿using System;//Console
 
-namespace LT_Showcase
+namespace LTShowcase
 {
     class Program
     {

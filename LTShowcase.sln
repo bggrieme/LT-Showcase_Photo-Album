@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LT Showcase", "src\LT Showcase.csproj", "{9876156B-FCC7-445E-9B33-7B2149833AC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LTShowcase", "src\LTShowcase.csproj", "{9876156B-FCC7-445E-9B33-7B2149833AC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{95497027-3BF3-475D-82EC-1FA8B9943C42}"
 EndProject

@@ -3,7 +3,7 @@ using System.Linq; //query clauses and lots of other useful data manipulation th
 using Newtonsoft.Json.Linq; //JArray, JToken, other JThings
 using System.Collections.Generic; //List, IGrouping
 
-namespace LT_Showcase
+namespace LTShowcase
 {
     public class PhotoProcessor
     {

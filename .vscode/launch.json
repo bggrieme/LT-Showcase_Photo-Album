@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/bin/Debug/netcoreapp3.1/LT Showcase.dll",
+            "program": "${workspaceFolder}/src/bin/Debug/netcoreapp2.2/LTShowcase.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "externalTerminal", //externalTerminal = cmd popup || integratedTerminal = VBC Terminal window || internalConsole = VBC Debug Console     
