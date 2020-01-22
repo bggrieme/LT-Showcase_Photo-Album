@@ -7,6 +7,7 @@ namespace LTShowcase
     {
         public InputManager() { }
 
+        /*This method parses integers from an input string accepting a format like "1, 2, 3, 5-10, 12" */
         public List<int> ParseInput(string input)
         {
             input += ','; //ensures last token is processed.
@@ -14,7 +15,6 @@ namespace LTShowcase
             string number = "";
             string rangeEnd = "";
             bool parsingRange = false;
-            //foreach char in input
             foreach (char ch in input)
             {
                 if (ch == ' ')
