@@ -1,37 +1,34 @@
-using System; //Console
-using System.Linq; //query clauses and lots of other useful data manipulation things
-using Newtonsoft.Json.Linq; //JArray, JToken, other JThings
-using System.Collections.Generic; //List, IGrouping
+using System;
+using System.Linq;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Net;
 
 namespace LTShowcase
 {
     public class PhotoProcessor
     {
-        public List<Photo> photos_List {get; private set;}
-        public PhotoProcessor(string jsonWebAddress)
+        public const string WebAddress = "https://jsonplaceholder.typicode.com/photos";
+        private WebClient Web = new WebClient();
+        public List<Photo> Photos { get; private set; }
+
+        public PhotoProcessor()
         {
-            this.photos_List = new List<Photo>();
-            System.Net.WebClient wc = new System.Net.WebClient();
-            JArray JArr = JArray.Parse(wc.DownloadString(jsonWebAddress)); //WebClient downloads the given address as a string, and JArray.Parse breaks that string into individual json tokens which are then stored in token_array
-            IList<JToken> jsonTokens = JArr.Children().ToList();      
-            foreach(JToken t in JArr)
-            {
-                this.photos_List.Add(t.ToObject<Photo>()); //deserialize each JToken into a Photo obj and add it to the List
-            }
+            this.Photos = new List<Photo>();
         }
 
         //Returns a subset of the data filtered by a given albumId
-        public List<Photo> subset_by_album(string albumId){
-            List<Photo> queryResults = new List<Photo>();
-            var results = 
-                from all in photos_List
-                where all.albumId == albumId
-                select all;
-            foreach(Photo p in results)
+        public List<Photo> GetAlbumPhotos(int albumId)
+        {
+            string albumWebAddress = WebAddress + "?albumId=" + albumId;
+            JArray jArr = JArray.Parse(Web.DownloadString(albumWebAddress));
+            List<JToken> jsonTokens = jArr.Children().ToList();
+            List<Photo> photos = new List<Photo>();
+            foreach (JToken token in jArr)
             {
-                queryResults.Add(p);
+                photos.Add(token.ToObject<Photo>());
             }
-            return queryResults;
+            return photos;
         }
 
         /*Prints all photos to console in the following example format
@@ -43,20 +40,21 @@ namespace LTShowcase
         [photo ID] photo title
         [photo ID] photo title
         etc. etc. */
-        public void print_id_and_title_GroupedBy_albumId()
+        public void PrintAlbum(int albumId)
         {
-            var group =
-                from photo in this.photos_List
-                group photo by photo.albumId; //an IEnumerable<IGrouping<, Photo>>
-            foreach (var grouping in group) //for each IGrouping in IEnumerable<IGrouping<, Photo>>
+            List<Photo> queryResults = this.GetAlbumPhotos(albumId);
+            if (queryResults.Count == 0)
             {
-                Console.WriteLine("> photo-album " + grouping.Key);
-                foreach (var photo in grouping) //for each photo in each IGrouping..
-                {
-                    Console.WriteLine("[{0}] {1}", photo.id, photo.title);
-                }
-                Console.WriteLine(); //just a blank line between albums for presentation purposes
+                Console.WriteLine("*** Album " + albumId + " is empty or nonexistent. ***");
+                Console.WriteLine();
+                return;
             }
+            Console.WriteLine("> photo-album " + albumId);
+            foreach (Photo photo in queryResults)
+            {
+                Console.WriteLine("[{0}] {1}", photo.id, photo.title);
+            }
+            Console.WriteLine();
         }
     }
 }
