@@ -22,7 +22,7 @@ A navigation window should open. Navigate to wherever you downloaded (and unzipp
 
 Now that you've established a workspace, you should see several icons on the very left of the VSC window. If you hover over the bottom one it should label itself as "Extensions" - click it!
 
-The navigation column on the left will show many different extensions available to download. In the search bar towards the top of this navigation pane type "C#" - you're now looking for the C# extension authored by Microsoft. It should be the top result. Once you find it, click the green "Install" icon next to its name.
+The navigation pane on the left will show many different extensions available to download. In the search bar towards the top of this pane type "C#". You're now looking for the C# extension authored by Microsoft - it should be the top result. Once you find it, click the green "Install" icon next to its name.
 
 That's it! You should now be able to run this program.
 
