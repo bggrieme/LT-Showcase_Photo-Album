@@ -12,5 +12,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <Content Include="Photo.cs" />
     <Content Include="PhotoProcessor.cs" />
+    <Content Include="InputManager.cs" />
   </ItemGroup>
 </Project>

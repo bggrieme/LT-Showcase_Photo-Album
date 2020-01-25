@@ -10,7 +10,8 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\LT Showcase.csproj" />
+    <ProjectReference Include="..\src\LTShowcase.csproj" />
     <Content Include="PhotoProcessor_tests.cs" />
+    <Content Include="InputManager_tests.cs" />
   </ItemGroup>
 </Project>
