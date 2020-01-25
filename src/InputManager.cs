@@ -58,6 +58,7 @@ namespace LTShowcase
                     parsingRange = true;
                 }
             }
+            output.Sort();
             return output;
         }
     }
