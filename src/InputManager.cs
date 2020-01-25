@@ -8,9 +8,9 @@ namespace LTShowcase
         public InputManager() { }
 
         /*This method parses integers from an input string accepting a format like "1, 2, 3, 5-10, 12" */
-        public List<int> ParseInput(string input)
+        public List<int> ParseInputToList(string input)
         {
-            input += ','; //ensures last token is processed.
+            input += ','; //ensures last token is processed in the event user didn't end their input with a comma.
             List<int> output = new List<int>();
             string number = "";
             string rangeEnd = "";
