@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ namespace LTShowcase
     {
         private WebClient Web = new WebClient();
         public readonly string WebAddress = "";
-
+        
         public PhotoProcessor(string webAddress)
         {
             this.WebAddress = webAddress;
@@ -21,14 +20,13 @@ namespace LTShowcase
         [photo ID 1] photo 1 title
         [photo ID 2] photo 2 title
         etc. etc. */
-        public string PhotoID_andTitle_GroupedBy_Album(List<int> albumIDs)
+        public string PhotoIDsAndTitlesGroupedByAlbum(List<int> albumIDs)
         {
             string result = "";
             List<Photo> queryResults = this.GetAlbumPhotos(albumIDs);
             IEnumerable<IGrouping<string, Photo>> albums = 
                 from photo in queryResults
                 group photo by photo.albumId;
-
             foreach (IGrouping<string, Photo> group in albums)
             {
                 result += "> photo-album " + group.Key + "\n";
@@ -41,7 +39,7 @@ namespace LTShowcase
             return result;
         }
 
-        //Grabs the indicated album data directly from the source. Deserializes this data into Photo objects and returns a List of these objects.
+        //Grabs the indicated album data directly from the source URL. Deserializes this data into Photo objects and returns a List of these objects.
         public List<Photo> GetAlbumPhotos(List<int> albumIDs)
         {
             string albumWebAddress = this.WebAddress;
