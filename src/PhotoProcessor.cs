@@ -8,24 +8,24 @@ namespace LTShowcase
     public class PhotoProcessor
     {
         private WebClient Web = new WebClient();
-        public readonly string WebAddress = "";
+        public readonly string WebAddress;
+        public List<Photo> Photos = new List<Photo>();
         
         public PhotoProcessor(string webAddress)
         {
             this.WebAddress = webAddress;
         }
 
-        /*Returns a string in the following example format
+        /*Returns a string built from the current contents of this.Photos in the following example format
         > photo-album 1
         [photo ID 1] photo 1 title
         [photo ID 2] photo 2 title
         etc. etc. */
-        public string PhotoIDsAndTitlesGroupedByAlbum(List<int> albumIDs)
+        public string PhotoIDsAndTitlesGroupedByAlbum()
         {
             string result = "";
-            List<Photo> queryResults = this.GetAlbumPhotos(albumIDs);
             IEnumerable<IGrouping<string, Photo>> albums = 
-                from photo in queryResults
+                from photo in this.Photos
                 group photo by photo.albumId;
             foreach (IGrouping<string, Photo> group in albums)
             {
@@ -39,22 +39,20 @@ namespace LTShowcase
             return result;
         }
 
-        //Grabs the indicated album data directly from the source URL. Deserializes this data into Photo objects and returns a List of these objects.
-        public List<Photo> GetAlbumPhotos(List<int> albumIDs)
+        //Grabs the indicated album data directly from the source URL. Deserializes this data into Photo objects and places them into the list of Photos.
+        public void DownloadPhotos(List<int> albumIDs)
         {
+            this.Photos.Clear();
             string albumWebAddress = this.WebAddress;
             BuildQueriedWebAddress(ref albumWebAddress, albumIDs);
             JArray jArr = JArray.Parse(Web.DownloadString(albumWebAddress));
-            List<JToken> jsonTokens = jArr.Children().ToList();
-            List<Photo> photos = new List<Photo>();
             foreach (JToken token in jArr)
             {
-                photos.Add(token.ToObject<Photo>());
+                this.Photos.Add(token.ToObject<Photo>());
             }
-            return photos;
         }
 
-        //This helper method builds a URL containing a single query to get all of the albums in one call of WebClient.DownloadString. I introduced this after observing how long a single call can take and decided to minimize the number of these calls needed.
+        //This helper method builds a URL containing a single query to get all of the desired albums in one call of WebClient.DownloadString.
         private void BuildQueriedWebAddress(ref string address, List<int> albumIDs)
         {
             address += "?";
