@@ -31,13 +31,13 @@ namespace LTShowcase
             string result = "";
             IEnumerable<IGrouping<string, Photo>> albums = 
                 from photo in Photos
-                group photo by photo.albumId;
+                group photo by photo.AlbumId;
             foreach (IGrouping<string, Photo> group in albums)
             {
                 result += "> photo-album " + group.Key + "\n";
                 foreach(Photo photo in group)
                 {
-                    result += "[" + photo.id + "] " + photo.title + "\n";
+                    result += "[" + photo.Id + "] " + photo.Title + "\n";
                 }
                 result += "\n";
             }
