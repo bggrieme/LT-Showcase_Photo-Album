@@ -7,13 +7,18 @@ namespace LTShowcase
 {
     public class PhotoProcessor
     {
-        private WebClient Web = new WebClient();
-        public readonly string WebAddress;
         public List<Photo> Photos = new List<Photo>();
         
-        public PhotoProcessor(string webAddress)
+        public PhotoProcessor(JArray jsonPhotos)
         {
-            this.WebAddress = webAddress;
+            foreach (JToken token in jsonPhotos)
+            {
+                this.Photos.Add(token.ToObject<Photo>());
+            }
+        }
+        public PhotoProcessor(List<Photo> photos)
+        {
+            this.Photos = photos;
         }
 
         /*Returns a string built from the current contents of this.Photos in the following example format
@@ -39,27 +44,6 @@ namespace LTShowcase
             return result;
         }
 
-        //Grabs the indicated album data directly from the source URL. Deserializes this data into Photo objects and places them into the list of Photos.
-        public void DownloadPhotos(List<int> albumIDs)
-        {
-            this.Photos.Clear();
-            string albumWebAddress = this.WebAddress;
-            BuildQueriedWebAddress(ref albumWebAddress, albumIDs);
-            JArray jArr = JArray.Parse(Web.DownloadString(albumWebAddress));
-            foreach (JToken token in jArr)
-            {
-                this.Photos.Add(token.ToObject<Photo>());
-            }
-        }
 
-        //This helper method builds a URL containing a single query to get all of the desired albums in one call of WebClient.DownloadString.
-        private void BuildQueriedWebAddress(ref string address, List<int> albumIDs)
-        {
-            address += "?";
-            foreach(int albumID in albumIDs)
-            {
-                address += "albumId=" + albumID + "&";
-            }
-        }
     }
 }
