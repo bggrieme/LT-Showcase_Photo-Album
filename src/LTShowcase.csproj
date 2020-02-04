@@ -13,5 +13,6 @@
     <Content Include="Photo.cs" />
     <Content Include="PhotoProcessor.cs" />
     <Content Include="InputManager.cs" />
+    <Content Include="JsonQueryManager.cs" />
   </ItemGroup>
 </Project>
