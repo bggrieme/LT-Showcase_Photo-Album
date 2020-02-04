@@ -24,7 +24,7 @@ namespace LTShowcase
             return PhotoProc.PhotoIDsAndTitlesGroupedByAlbum();
         }
 
-        //This helper method builds a URL containing a single query to get all of the desired albums in one call of WebClient.DownloadString.
+        //Builds a URL containing a single query to get all of the desired albums in one call of WebClient.DownloadString.
         private string BuildQueriedURL(string baseURL, List<int> albumIDs)
         {
             string queriedURL = baseURL;
