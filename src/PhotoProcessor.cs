@@ -13,12 +13,12 @@ namespace LTShowcase
         {
             foreach (JToken token in jsonPhotos)
             {
-                this.Photos.Add(token.ToObject<Photo>());
+                Photos.Add(token.ToObject<Photo>());
             }
         }
         public PhotoProcessor(List<Photo> photos)
         {
-            this.Photos = photos;
+            Photos = photos;
         }
 
         /*Returns a string built from the current contents of this.Photos in the following example format
@@ -30,7 +30,7 @@ namespace LTShowcase
         {
             string result = "";
             IEnumerable<IGrouping<string, Photo>> albums = 
-                from photo in this.Photos
+                from photo in Photos
                 group photo by photo.albumId;
             foreach (IGrouping<string, Photo> group in albums)
             {
