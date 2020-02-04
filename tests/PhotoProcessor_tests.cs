@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 public class PhotoProcessor_tests
 {
-    List<Photo> testPhotos = new List<Photo>();
 
     [Fact]
     public void PhotoIDsAndTitlesGroupedByAlbum_Returns_FormattedString()
     {
-        this.GenerateAndAddTestAlbum(ref this.testPhotos, "1", 1);
-        this.GenerateAndAddTestAlbum(ref this.testPhotos, "2", 1);
-        PhotoProcessor photoProc = new PhotoProcessor(this.testPhotos);
+        List<Photo> testPhotos = new List<Photo>();
+        this.GenerateAndAddTestAlbum(ref testPhotos, "1", 1);
+        this.GenerateAndAddTestAlbum(ref testPhotos, "2", 1);
+        PhotoProcessor photoProc = new PhotoProcessor(testPhotos);
         string expected = "> photo-album 1\n[1] title1-1\n\n" + "> photo-album 2\n[1] title2-1\n\n";
         Assert.True(photoProc.PhotoIDsAndTitlesGroupedByAlbum() == expected);
     }
